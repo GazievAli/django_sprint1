@@ -43,12 +43,18 @@ posts = [
     },
 ]
 
+def filter_post(id):
+    return next(filter(lambda p: p['id'] == id, posts), None)
+
+def filter_category(category):
+    return list(filter(lambda p: p['category'] == category, posts))
+
 # Create your views here.
 def index(request):
-	return render(request, 'blog/index.html')
+	return render(request, 'blog/index.html', {'posts': posts})
 
 def post_detail(request, id):
-  return render(request, 'blog/detail.html', {'id': id})
+  return render(request, 'blog/detail.html', {"post": filter_post(id)})
 
 def category_posts(request, category_slug):
-	return render(request, 'blog/category.html', {'category_slug': category_slug})
+	return render(request, 'blog/category.html', {'category_slug': category_slug, "posts": filter_category(category_slug)})
