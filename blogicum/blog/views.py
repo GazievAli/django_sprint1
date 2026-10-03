@@ -59,7 +59,11 @@ def index(request):
 
 
 def post_detail(request, id):
-  return render(request, 'blog/detail.html', {"post": filter_post(id)})
+    return render(
+        request,
+        'blog/detail.html',
+        {'post': filter_post(id)},
+    )
 
 
 def category_posts(request, category_slug):
